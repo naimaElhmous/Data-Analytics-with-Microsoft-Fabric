@@ -27,25 +27,9 @@ This project adopts the **Medallion architecture**, which organizes data into la
    - Often includes **Dimensional Modeling** (fact and dimension tables).  
    - Aggregated data optimized for advanced analytics and reporting.
 
-## 3. Data Pipeline with Microsoft Fabric
 
-### 3.1 Automated Data Pipelines with Data Factory
 
-![ADF Pipeline](./images/diagram.png)  
-*Figure: An Azure Data Factory pipeline showing Lookup, ForEach, Copy Data, Upsert Watermark, transformations in Silver/Gold layers, and a semantic model refresh.*
-
-1. **Lookup**: Retrieves a list of tables (e.g., from a control or metadata table) to ingest.  
-2. **ForEach Table**:
-   - **Lookup Old Watermark**: Identifies the last processed record (timestamp or numeric key).  
-   - **Copy Data**: Copies only new or changed records into the **Bronze** layer.  
-   - **Upsert Watermark**: Updates or inserts the latest watermark, ensuring incremental loads in subsequent runs.
-
-3. **Transform Silver Layer**: Cleanses and standardizes data from the Bronze layer, removing duplicates and inconsistencies.  
-4. **Transform Gold Layer**: Applies business logic, dimensional modeling, and advanced transformations to produce analytics-ready data.  
-5. **Semantic Model Refresh**: Updates the downstream semantic model (e.g., Azure Analysis Services or Power BI datasets) so that reports and dashboards reflect the latest data.  
-6. **Error Notification**: If any step fails, an email alert is sent through Office 365, enabling rapid troubleshooting.
-
-### 3.2 Data Engineering
+### 3 Data Engineering
 
 - **Lakehouse**: Stores data in a unified platform, offering both structured and unstructured data handling.  
 - **Spark Notebooks**: Execute large-scale transformations and analytics on the Lakehouse data, ensuring scalable and efficient processing.
